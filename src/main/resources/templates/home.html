@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈</title>
+</head>
+<body>
+<h3><span th:text="${#authentication.name}"></span>님 반갑습니다!</h3>
+<h3 th:switch="${#authentication.authorities.![authority].get(0)}">
+    당신의 등급은
+    <span th:case="'ROLE_free'">무료</span>
+    <span th:case="'ROLE_basic'">베이직</span>
+    <span th:case="'ROLE_premium'">프리미엄</span>
+    입니다.
+</h3>
+<div th:switch="${#authentication.authorities.![authority].get(0)}">
+    <div th:case="'ROLE_free'"></div>
+    <div th:case="'ROLE_basic'">
+        <button onclick="location.href = '/contents/basic'">베이직</button>
+    </div>
+    <span th:case="'ROLE_premium'">
+            <button onclick="location.href = '/contents/basic'">베이직</button>
+            <button onclick="location.href = '/contents/premium'">프리미엄</button>
+        </span>
+</div>
+<br>
+<form action="#" th:action="@{/logout}" method="post"> <!-- 로그아웃을 위한 요청 보내기 -->
+    <button>로그아웃</button>
+</form>
+<br>
+<!--    <div>-->
+<!-- spring security의 인증정보 -->
+<!--        <p th:text="${#authentication}"></p>-->
+<!--        <p th:text="${#authentication.authorities}"></p>-->
+<!--    </div>-->
+</body>
+</html>

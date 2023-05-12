@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>등록</title>
+</head>
+<body>
+<!-- 1) action => URL 2) method => Get, Post 3) th:object(dto) -->
+<!--
+   @PostMapping("/register")
+private String postRegister(
+    AccountDTO user,
+    RedirectAttributes redirectAttributes
+) {
+-->
+<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+    <!-- AccountDTO => (1) username, (2) password, (3) role  -->
+    <div>
+        <label>Username: </label>
+        <input type="text" name="username" th:field="*{username}" required>
+    </div>
+    <div>
+        <label>Password: </label>
+        <input type="password" name="password" th:field="*{password}" required>
+    </div>
+    <div>
+        <label>Role: </label>
+        <select name="role" th:field="*{role}">
+            <option value="free" th:selected="${user.role = 'free'}">free</option>
+            <option value="basic" th:selected="${user.role = 'basic'}">Basic</option>
+            <option value="premium" th:selected="${user.role = 'premium'}">Premium</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <button>등록</button>
+        <button type="button" onclick="location.href='/'">취소</button>
+    </div>
+    <div>
+        <h3 th:text="${msg}"></h3>
+    </div>
+</form>
+</body>
+</html>
+
+
+
